@@ -1,7 +1,7 @@
 import { Entity, PrimaryGeneratedColumn, Column, ManyToOne } from "typeorm";
 import { UserEntity } from "./user.entity";
 import { VenueEntity } from "./venue.entity";
-import {TableNameEnum} from "./table-name.enum";
+import {TableNameEnum} from "../enums/table-name.enum";
 
 @Entity(TableNameEnum.REVIEWS)
 export class ReviewEntity {

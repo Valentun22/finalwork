@@ -10,8 +10,8 @@ import { Injectable, NotFoundException } from '@nestjs/common';
 import * as dotenv from 'dotenv';
 import { v4 } from 'uuid';
 import getConfigs from '../../../configs/configuration';
-import { CarRepository } from '../../repository/services/car.repository';
 import { s3ClientMinio } from '../configs/minio-config';
+import {VenuesRepository} from "../../repository/services/venues.repository";
 
 dotenv.config({ path: './environments/local.env' });
 
@@ -20,21 +20,21 @@ const s3Config = getConfigs().s3;
 @Injectable()
 export class S3Service {
   private readonly client: S3Client;
-  constructor(private readonly carRepository: CarRepository) {
+  constructor(private readonly venuesRepository: VenuesRepository) {
     this.client = s3ClientMinio;
   }
 
-  async uploadCarPhoto(
+  async uploadVenuePhoto(
     file: Express.Multer.File,
-    carId: string,
+    venueId: string,
   ): Promise<string> {
-    const car = await this.carRepository.findByIdOrThrow(carId);
+    const venue = await this.venuesRepository.findByIdOrThrow(venueId);
 
-    if (car.image) {
-      await this.deleteFileFromS3(car.image);
+    if (venue.image) {
+      await this.deleteFileFromS3(venue.image);
     }
 
-    const filePath = this.buildPath(file.originalname, carId);
+    const filePath = this.buildPath(file.originalname, venueId);
     await this.client.send(
       new PutObjectCommand({
         Bucket: s3Config.bucketName,
@@ -45,7 +45,7 @@ export class S3Service {
         ContentLength: file.size,
       }),
     );
-    await this.carRepository.save(car);
+    await this.venuesRepository.save(venue);
     return filePath;
   }
 
@@ -62,7 +62,7 @@ export class S3Service {
     }
   }
 
-  private buildPath(fileName: string, carId: string): string {
-    return `cars/${carId}/${v4()}${path.extname(fileName)}`;
+  private buildPath(fileName: string, venueId: string): string {
+    return `venues/${venueId}/${v4()}${path.extname(fileName)}`;
   }
 }

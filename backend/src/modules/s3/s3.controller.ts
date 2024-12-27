@@ -10,19 +10,19 @@ import {
   UseInterceptors,
 } from '@nestjs/common';
 import { FileInterceptor } from '@nestjs/platform-express';
-import { ApiOperation, ApiTags } from '@nestjs/swagger';
 
 import { S3Service } from './services/s3.service';
 import { imageFileFilter } from './utils/file-upload.utils';
 import { photoConfig } from './utils/photo.config';
+import { ApiOperation, ApiTags } from "@nestjs/swagger";
 
-@ApiTags('s3')
+@ApiTags('s3 - work with images')
 @Controller('s3')
 export class S3Controller {
   constructor(private readonly s3Service: S3Service) {}
 
   @ApiOperation({ summary: 'Upload photo' })
-  @Post('/:carId/photo')
+  @Post('/:venueId/photo')
   @HttpCode(HttpStatus.CREATED)
   @UseInterceptors(
     FileInterceptor('image', {
@@ -32,19 +32,20 @@ export class S3Controller {
       },
     }),
   )
-  async uploadCarPhoto(
+  async uploadVenuePhoto(
     @UploadedFile() file: Express.Multer.File,
-    @Param('carId', ParseUUIDPipe) carId: string,
+    @Param('venueId', ParseUUIDPipe) venueId: string,
   ) {
-    console.log(carId);
-    const urlPhoto = await this.s3Service.uploadCarPhoto(file, carId);
+    console.log(venueId);
+    const urlPhoto = await this.s3Service.uploadVenuePhoto(file, venueId);
     return { urlPhoto };
   }
 
   @ApiOperation({ summary: 'Delete photo' })
-  @Delete('/carId/photo')
+  @Delete('/venueId/photo')
   @HttpCode(HttpStatus.NO_CONTENT)
-  async deleteCarPhoto(@Param(':carId') carId: string) {
-    await this.s3Service.deleteFileFromS3(carId);
+  async deleteVenuePhoto(@Param(':venueId') venueId: string) {
+    await this.s3Service.deleteFileFromS3(venueId);
   }
 }
+

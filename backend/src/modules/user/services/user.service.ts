@@ -1,19 +1,11 @@
-import {
-  ConflictException,
-  HttpException,
-  HttpStatus,
-  Injectable,
-  UnprocessableEntityException,
-} from '@nestjs/common';
-
-import { UserEntity } from '../../../database/entities/user.entity';
-import { RolesEnum } from '../../../database/enums/roles.enum';
-import { IUserData } from '../../auth/interfaces/user-data.interface';
-import { RefreshTokenRepository } from '../../repository/services/refresh-token.repository';
-import { UserRepository } from '../../repository/services/user.repository';
-import { UserMapper } from './user.mapper';
-import { UserResDto } from '../dto/res/user.res.dto';
-import { UpdateUserDto } from '../dto/req/update-user.dto';
+import {ConflictException, Injectable, UnprocessableEntityException,} from '@nestjs/common';
+import {UserEntity} from '../../../database/entities/user.entity';
+import {IUserData} from '../../auth/interfaces/user-data.interface';
+import {UserMapper} from './user.mapper';
+import {UserResDto} from '../dto/res/user.res.dto';
+import {UpdateUserDto} from '../dto/req/update-user.dto';
+import {RefreshTokenRepository} from "../../repository/services/refresh-token.repository";
+import {UserRepository} from "../../repository/services/user.repository";
 
 @Injectable()
 export class UserService {
@@ -34,13 +26,6 @@ export class UserService {
     const entity = await this.userRepository.findOneBy({ id: userData.userId });
     await this.userRepository.save(this.userRepository.merge(entity, dto));
     return UserMapper.toResponseDto(entity);
-  }
-
-  public async becomeSeller(userData: IUserData): Promise<void> {
-    const entity = await this.userRepository.findOneBy({ id: userData.userId });
-    entity.roles = RolesEnum.SELLER;
-    await this.userRepository.save(entity);
-    throw new HttpException('It is possible to sell the car', HttpStatus.OK);
   }
 
   public async getPublicUser(userId: string): Promise<UserResDto> {
@@ -68,7 +53,7 @@ export class UserService {
     if (user.id !== userData.userId) {
       throw new ConflictException('You can not delete this user');
     }
-    await this.refreshTokenRepository.delete({ user_id: userData.userId });
+    await this.refreshTokenRepository.delete({ userId: userData.userId });
     await this.userRepository.delete({
       id: userData.userId,
     });

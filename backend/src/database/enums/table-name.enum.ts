@@ -1,5 +1,5 @@
 export enum TableNameEnum {
-  ROLES = 'roles',
+  ROLE = 'role',
   FAVORITE = 'favorite',
   MEETINGS = "meetings",
   NEWS = "news",
@@ -7,4 +7,6 @@ export enum TableNameEnum {
   REVIEWS = "reviews",
   USERS = 'users',
   VENUES = "venues",
+  SIGNBOARD = "signboard",
+  STATISTICS = 'statistics',
 }

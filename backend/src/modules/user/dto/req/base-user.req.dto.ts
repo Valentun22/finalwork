@@ -1,7 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { Transform, Type } from 'class-transformer';
 import {
-  IsNotEmpty,
   IsOptional,
   IsString,
   Length,
@@ -34,7 +33,7 @@ export class BaseUserReqDto {
   image?: string;
 
   @ApiProperty({
-    default: 'testingEmail@gmail.com',
+    default: 'testEmail@gmail.com',
     description: 'Field for valid mail',
   })
   @IsString()

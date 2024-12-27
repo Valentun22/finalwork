@@ -1,5 +1,5 @@
 export enum StatusTypeEnum {
-  PENDING = "pending",
-  APPROVED = "approved",
-  REJECTED = "rejected",
+  ACTIVE = 'active',
+  BLOCKED = 'blocked',
+  INACTIVE = 'inactive',
 }

@@ -40,7 +40,7 @@ export class UserController {
   }
 
   @ApiBearerAuth()
-  @ApiOperation({ summary: 'Change your seller post' })
+  @ApiOperation({ summary: 'Change your post' })
   @Put('me/seller')
   public async becomeSeller(@CurrentUser() userData: IUserData): Promise<void> {
     await this.userService.becomeSeller(userData);

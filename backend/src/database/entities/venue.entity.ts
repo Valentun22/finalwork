@@ -1,17 +1,19 @@
-import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, OneToMany } from "typeorm";
+import {Entity, Column, ManyToOne, OneToMany, OneToOne} from "typeorm";
 import { UserEntity } from "./user.entity";
 import { ReviewEntity } from "./review.entity";
 import { NewsEntity } from "./news.entity";
 import { FavoriteEntity } from "./favorite.entity";
-import {TableNameEnum} from "./table-name.enum";
+import {SignboardEntity} from "./signboard.entity";
+import {BaseModel} from "./models/base.model";
+import {TableNameEnum} from "../enums/table-name.enum";
 
 @Entity(TableNameEnum.VENUES)
-export class VenueEntity {
-    @PrimaryGeneratedColumn()
-    id: number;
-
+export class VenueEntity extends BaseModel{
     @Column()
     name: string;
+
+    @Column('text', { nullable: true })
+    image?: string;
 
     @Column()
     location: string;
@@ -28,15 +30,23 @@ export class VenueEntity {
     @Column("simple-array")
     tags: string[];
 
+    @Column()
     @ManyToOne(() => UserEntity, (user) => user.venues)
     owner: UserEntity;
 
+    @Column()
     @OneToMany(() => ReviewEntity, (review) => review.venue)
     reviews: ReviewEntity[];
 
+    @Column()
     @OneToMany(() => NewsEntity, (news) => news.venue)
     news: NewsEntity[];
 
+    @Column()
     @OneToMany(() => FavoriteEntity, (favorite) => favorite.venue)
     favorites: FavoriteEntity[];
+
+    @Column()
+    @OneToOne(() => SignboardEntity, (entity) => entity.venue)
+    signboard?: SignboardEntity;
 }

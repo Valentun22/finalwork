@@ -1,8 +1,6 @@
 import { Injectable, UnauthorizedException } from '@nestjs/common';
 import * as bcrypt from 'bcrypt';
 
-import { AccountTypeEnum } from '../../../database/enums/account-type.enum';
-import { RolesEnum } from '../../../database/enums/roles.enum';
 import { RefreshTokenRepository } from '../../repository/services/refresh-token.repository';
 import { UserRepository } from '../../repository/services/user.repository';
 import { UserService } from '../../user/services/user.service';
@@ -14,7 +12,7 @@ import { SignUpReqDto } from '../dto/req/sign-up.req.dto';
 import { AuthUserResDto } from '../dto/res/auth-user.res.dto';
 import { SignInReqDto } from '../dto/req/sign-in.req.dto';
 import { TokenResDto } from '../dto/res/token.res.dto';
-import { UserMapper } from '../../user/services/user.mapper';
+import {UserRoleEnum} from "../../../database/enums/roles.enum";
 
 @Injectable()
 export class AuthService {
@@ -57,8 +55,7 @@ export class AuthService {
 
     const password = await bcrypt.hash(dto.password, 10);
     const user = this.userRepository.create({ ...dto, password });
-    user.roles = RolesEnum.ADMINISTRATOR;
-    user.accountType = AccountTypeEnum.PREMIUM_ACCOUNT;
+    user.role = UserRoleEnum.ADMIN;
     await this.userRepository.save(user);
     const isPasswordValid = bcrypt.compare(dto.password, user.password);
     if (!isPasswordValid) {
@@ -105,7 +102,7 @@ export class AuthService {
     });
     await Promise.all([
       this.refreshRepository.delete({
-        user_id: user.id,
+        userId: user.id,
         deviceId: dto.deviceId,
       }),
       this.authCacheService.removeToken(user.id, dto.deviceId),
@@ -128,7 +125,7 @@ export class AuthService {
   public async logout(userData: IUserData): Promise<void> {
     await Promise.all([
       this.refreshRepository.delete({
-        user_id: userData.userId,
+        userId: userData.userId,
         deviceId: userData.deviceId,
       }),
       this.authCacheService.removeToken(userData.userId, userData.deviceId),
@@ -141,7 +138,7 @@ export class AuthService {
     });
     await Promise.all([
       this.refreshRepository.delete({
-        user_id: user.id,
+        userId: user.id,
         deviceId: userData.deviceId,
       }),
       this.authCacheService.removeToken(user.id, userData.deviceId),

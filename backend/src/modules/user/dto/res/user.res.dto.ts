@@ -1,4 +1,6 @@
-import { RolesEnum } from '../../../../database/enums/roles.enum';
+import {UserRoleEnum} from "../../../../database/enums/roles.enum";
+import {ReviewEntity} from "../../../../database/entities/review.entity";
+import {FavoriteEntity} from "../../../../database/entities/favorite.entity";
 
 export class UserResDto {
   id: string;
@@ -11,7 +13,9 @@ export class UserResDto {
 
   image: string;
 
-  accountType: string;
+  role: UserRoleEnum;
 
-  role: RolesEnum;
+  reviews: ReviewEntity[];
+
+  favorites: FavoriteEntity[];
 }
