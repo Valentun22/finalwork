@@ -25,7 +25,7 @@ import { SignboardListReqDto } from './dto/req/signboard-list.req.dto';
 import { SignboardListResDto } from './dto/res/signboard-list.res.dto';
 import { RoleUser } from '../../common/decorators/check.role';
 import {UserRoleEnum} from "../../database/enums/roles.enum";
-import {MoreSignboardAllowedGuard} from "./guards/more-advertisements-allowed.guard";
+import {MoreSignboardAllowedGuard} from "./guards/more-signboard-allowed.guard";
 
 @ApiTags('Signboard')
 @Controller('signboard')

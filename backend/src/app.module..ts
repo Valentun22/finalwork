@@ -5,6 +5,8 @@ import {AuthModule} from "./modules/auth/auth.module";
 import {PostgresModule} from "./modules/postgres/postgres.module";
 import {RedisModule} from "./modules/redis/redis.module";
 import {UserModule} from "./modules/user/user.module";
+import {FavoriteModule} from "./modules/favorite/favorite.module";
+import {ReviewModule} from "./modules/review/review.module";
 
 @Module({
     imports: [
@@ -16,6 +18,8 @@ import {UserModule} from "./modules/user/user.module";
         UserModule,
         PostgresModule,
         RedisModule,
+        FavoriteModule,
+        ReviewModule,
     ],
 })
 export class AppModule {}
