@@ -1,22 +1,21 @@
 import {Entity, PrimaryGeneratedColumn, ManyToOne, JoinColumn, Column} from 'typeorm';
 import {UserEntity} from "../../../database/entities/user.entity";
-import {VenueEntity} from "../../venue/entity/venue.entity";
-import {TableNameEnum} from "../../../database/enums/table-name.enum";
+import {VenueEntity} from "./venue.entity";
 
 
-@Entity(TableNameEnum.FAVORITE)
-export class FavoriteEntity {
+@Entity()
+export class VenueLikeEntity {
     @PrimaryGeneratedColumn('uuid')
     id: string;
 
-    @ManyToOne(() => UserEntity, (user) => user.favorites)
+    @ManyToOne(() => UserEntity, (user) => user.likedVenues)
     @JoinColumn({ name: 'userId' })
     user: UserEntity;
 
     @Column()
     userId: string;
 
-    @ManyToOne(() => VenueEntity, (venue) => venue.favorites)
+    @ManyToOne(() => VenueEntity, (venue) => venue.likes)
     @JoinColumn({ name: 'venueId' })
     venue: VenueEntity;
 

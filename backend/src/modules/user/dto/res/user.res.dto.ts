@@ -1,6 +1,6 @@
 import {UserRoleEnum} from "../../../../database/enums/roles.enum";
-import {ReviewEntity} from "../../../../database/entities/review.entity";
-import {FavoriteEntity} from "../../../../database/entities/favorite.entity";
+import {ReviewEntity} from "../../../review/ entities/review.entity";
+import {FavoriteEntity} from "../../../favorite/ entities/favorite.entity";
 
 export class UserResDto {
   id: string;

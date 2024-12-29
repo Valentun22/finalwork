@@ -1,6 +1,8 @@
-import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
+import {Entity, Column, PrimaryGeneratedColumn, ManyToOne, JoinColumn} from 'typeorm';
+import {VenueEntity} from "../../venue/entity/venue.entity";
+import {TableNameEnum} from "../../../database/enums/table-name.enum";
 
-@Entity('reviews')
+@Entity(TableNameEnum.REVIEWS)
 export class ReviewEntity {
     @PrimaryGeneratedColumn('uuid')
     id: string;
@@ -19,4 +21,8 @@ export class ReviewEntity {
 
     @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
     createdAt: Date;
+
+    @ManyToOne(() => VenueEntity, (venue) => venue.reviews)
+    @JoinColumn({ name: 'venueId' })
+    venue: VenueEntity;
 }

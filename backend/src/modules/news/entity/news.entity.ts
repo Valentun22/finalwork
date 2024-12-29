@@ -5,9 +5,10 @@ import {
     ManyToOne,
     JoinColumn,
 } from 'typeorm';
-import {VenueEntity} from "../../../database/entities/venue.entity";
+import {TableNameEnum} from "../../../database/enums/table-name.enum";
+import {VenueEntity} from "../../venue/entity/venue.entity";
 
-@Entity()
+@Entity(TableNameEnum.NEWS)
 export class NewsEntity {
     @PrimaryGeneratedColumn('uuid')
     id: string;
