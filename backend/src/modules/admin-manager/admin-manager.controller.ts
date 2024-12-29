@@ -11,15 +11,14 @@ import {
   UseGuards,
 } from '@nestjs/common';
 import { ApiBearerAuth, ApiOperation, ApiTags } from '@nestjs/swagger';
-
-import { RoleUser } from '../../common/decorators/check.role';
-import { RolesGuard } from '../../common/guards/role.guard';
 import { UserRoleEnum} from '../../database/enums/roles.enum';
 import { CurrentUser } from '../auth/decorators/current-user.decorator';
 import { IUserData } from '../auth/interfaces/user-data.interface';
 import { AdminManagerService } from './services/admin-manager.service';
 import { UserResDto } from '../user/dto/res/user.res.dto';
 import { BaseAdminManagerReqDto } from './dto/req/base-admin-manager.req.dto';
+import {RoleUser} from "./decorators/check.role";
+import {RolesGuard} from "./guards/role.guard";
 
 @ApiTags('Admin/Manager. This tag is for admin roles.')
 @RoleUser(UserRoleEnum.ADMIN)

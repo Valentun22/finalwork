@@ -1,7 +1,6 @@
 import {Entity, PrimaryGeneratedColumn, ManyToOne, JoinColumn, Column} from 'typeorm';
-import {UserEntity} from "../../../database/entities/user.entity";
 import {VenueEntity} from "./venue.entity";
-
+import {UserEntity} from "../../user/entity/user.entity";
 
 @Entity()
 export class VenueLikeEntity {

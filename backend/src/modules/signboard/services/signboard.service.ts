@@ -3,7 +3,6 @@ import {
   Injectable,
   UnprocessableEntityException,
 } from '@nestjs/common';
-
 import { StatusTypeEnum } from '../../../database/enums/status-type.enum';
 import { IUserData } from '../../auth/interfaces/user-data.interface';
 import { SignboardMapper } from './signboard.mapper';
@@ -12,9 +11,9 @@ import { SignboardResDto } from '../dto/res/signboard.res.dto';
 import { UpdateSignboardDto } from '../dto/req/update-signboard.dto';
 import { SignboardListReqDto } from '../dto/req/signboard-list.req.dto';
 import { SignboardListResDto } from '../dto/res/signboard-list.res.dto';
-import {SignboardRepository} from "../../repository/services/signboard.repository";
-import {VenuesRepository} from "../../repository/services/venues.repository";
-import {StatisticRepository} from "../../repository/services/statistic.repository";
+import {SignboardRepository} from "../../../repository/services/signboard.repository";
+import {VenuesRepository} from "../../../repository/services/venues.repository";
+import {StatisticRepository} from "../../../repository/services/statistic.repository";
 
 @Injectable()
 export class SignboardService {

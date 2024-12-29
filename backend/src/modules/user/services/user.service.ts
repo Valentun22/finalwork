@@ -1,11 +1,11 @@
 import {ConflictException, Injectable, UnprocessableEntityException,} from '@nestjs/common';
-import {UserEntity} from '../../../database/entities/user.entity';
 import {IUserData} from '../../auth/interfaces/user-data.interface';
 import {UserMapper} from './user.mapper';
 import {UserResDto} from '../dto/res/user.res.dto';
 import {UpdateUserDto} from '../dto/req/update-user.dto';
-import {RefreshTokenRepository} from "../../repository/services/refresh-token.repository";
-import {UserRepository} from "../../repository/services/user.repository";
+import {UserRepository} from "../../../repository/services/user.repository";
+import {RefreshTokenRepository} from "../../../repository/services/refresh-token.repository";
+import {UserEntity} from "../entity/user.entity";
 
 @Injectable()
 export class UserService {

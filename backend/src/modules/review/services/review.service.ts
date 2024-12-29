@@ -4,7 +4,6 @@ import { Repository } from 'typeorm';
 import {ReviewEntity} from "../ entities/review.entity";
 import {IUserData} from "../../auth/interfaces/user-data.interface";
 import {CreateReviewDto} from "../dto/create-review.dto";
-import {FavoriteEntity} from "../../favorite/ entities/favorite.entity";
 
 @Injectable()
 export class ReviewService {

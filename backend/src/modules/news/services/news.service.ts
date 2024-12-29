@@ -23,19 +23,15 @@ export class NewsService {
         offset?: number,
     ): Promise<NewsEntity[]> {
         const query = this.newsRepository.createQueryBuilder('news');
-
         if (venueId) {
             query.where('news.venueId = :venueId', { venueId });
         }
-
         if (limit) {
             query.take(limit);
         }
-
         if (offset) {
             query.skip(offset);
         }
-
         return await query.getMany();
     }
 

@@ -13,8 +13,6 @@ import {
   UseGuards,
 } from '@nestjs/common';
 import { ApiBearerAuth, ApiOperation, ApiTags } from '@nestjs/swagger';
-
-import { RolesGuard } from '../../common/guards/role.guard';
 import { CurrentUser } from '../auth/decorators/current-user.decorator';
 import { IUserData } from '../auth/interfaces/user-data.interface';
 import { SignboardService } from './services/signboard.service';
@@ -23,9 +21,10 @@ import { SignboardResDto } from './dto/res/signboard.res.dto';
 import { UpdateSignboardDto } from './dto/req/update-signboard.dto';
 import { SignboardListReqDto } from './dto/req/signboard-list.req.dto';
 import { SignboardListResDto } from './dto/res/signboard-list.res.dto';
-import { RoleUser } from '../../common/decorators/check.role';
 import {UserRoleEnum} from "../../database/enums/roles.enum";
 import {MoreSignboardAllowedGuard} from "./guards/more-signboard-allowed.guard";
+import {RolesGuard} from "../admin-manager/guards/role.guard";
+import {RoleUser} from "../admin-manager/decorators/check.role";
 
 @ApiTags('Signboard')
 @Controller('signboard')

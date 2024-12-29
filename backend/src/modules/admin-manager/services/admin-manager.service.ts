@@ -1,12 +1,12 @@
 import { ConflictException, Injectable } from '@nestjs/common';
 import { IUserData } from '../../auth/interfaces/user-data.interface';
-import { UserRepository } from '../../repository/services/user.repository';
 import { UserMapper } from '../../user/services/user.mapper';
 import { UserResDto } from '../../user/dto/res/user.res.dto';
 import { BaseAdminManagerReqDto } from '../dto/req/base-admin-manager.req.dto';
-import {SignboardRepository} from "../../repository/services/signboard.repository";
 import {AccountTypeEnum} from "../../../database/enums/account-type.enum";
 import {StatusTypeEnum} from "../../../database/enums/status-type.enum";
+import {SignboardRepository} from "../../../repository/services/signboard.repository";
+import {UserRepository} from "../../../repository/services/user.repository";
 
 @Injectable()
 export class AdminManagerService {

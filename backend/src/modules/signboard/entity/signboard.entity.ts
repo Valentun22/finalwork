@@ -5,13 +5,12 @@ import {
   ManyToOne, OneToMany,
   OneToOne,
 } from 'typeorm';
-
-import { BaseModel } from './models/base.model';
-import { UserEntity } from './user.entity';
-import {VenueEntity} from "./venue.entity";
-import {StatusTypeEnum} from "../enums/status-type.enum";
-import {TableNameEnum} from "../enums/table-name.enum";
-import {StatisticEntity} from "./statistic.entity";
+import {TableNameEnum} from "../../../database/enums/table-name.enum";
+import {BaseModel} from "../../../database/entities/models/base.model";
+import {StatusTypeEnum} from "../../../database/enums/status-type.enum";
+import {UserEntity} from "../../user/entity/user.entity";
+import {VenueEntity} from "../../venue/entity/venue.entity";
+import {StatisticEntity} from "../../../database/entities/statistic.entity";
 
 @Entity(TableNameEnum.SIGNBOARD)
 export class SignboardEntity extends BaseModel {

@@ -10,7 +10,6 @@ import {
   Put,
 } from '@nestjs/common';
 import { ApiBearerAuth, ApiOperation, ApiTags } from '@nestjs/swagger';
-
 import { CurrentUser } from '../auth/decorators/current-user.decorator';
 import { IUserData } from '../auth/interfaces/user-data.interface';
 import { UserService } from './services/user.service';
@@ -37,13 +36,6 @@ export class UserController {
     @Body() dto: UpdateUserDto,
   ): Promise<UserResDto> {
     return await this.userService.updateMe(userData, dto);
-  }
-
-  @ApiBearerAuth()
-  @ApiOperation({ summary: 'Change your post' })
-  @Put('me/seller')
-  public async becomeSeller(@CurrentUser() userData: IUserData): Promise<void> {
-    await this.userService.becomeSeller(userData);
   }
 
   @ApiBearerAuth()

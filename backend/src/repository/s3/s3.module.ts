@@ -1,6 +1,5 @@
 import { Module } from '@nestjs/common';
 import * as dotenv from 'dotenv';
-
 import { S3Controller } from './s3.controller';
 import { S3Service } from './services/s3.service';
 

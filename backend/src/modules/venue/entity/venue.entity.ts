@@ -1,12 +1,11 @@
 import { Entity, Column, ManyToOne, OneToMany, OneToOne } from 'typeorm';
 import {TableNameEnum} from "../../../database/enums/table-name.enum";
 import {BaseModel} from "../../../database/entities/models/base.model";
-import {UserEntity} from "../../../database/entities/user.entity";
 import {ReviewEntity} from "../../review/ entities/review.entity";
 import {NewsEntity} from "../../news/entity/news.entity";
 import {FavoriteEntity} from "../../favorite/ entities/favorite.entity";
-import {SignboardEntity} from "../../../database/entities/signboard.entity";
-
+import {UserEntity} from "../../user/entity/user.entity";
+import {SignboardEntity} from "../../signboard/entity/signboard.entity";
 
 @Entity(TableNameEnum.VENUES)
 export class VenueEntity extends BaseModel {

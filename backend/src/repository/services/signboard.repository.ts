@@ -1,7 +1,7 @@
 import { Injectable, UnprocessableEntityException } from '@nestjs/common';
 import { DataSource, Repository } from 'typeorm';
-import {SignboardEntity} from "../../../database/entities/signboard.entity";
-import {SignboardListReqDto} from "../../signboard/dto/req/signboard-list.req.dto";
+import {SignboardEntity} from "../../modules/signboard/entity/signboard.entity";
+import {SignboardListReqDto} from "../../modules/signboard/dto/req/signboard-list.req.dto";
 
 @Injectable()
 export class SignboardRepository extends Repository<SignboardEntity> {

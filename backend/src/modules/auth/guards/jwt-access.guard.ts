@@ -6,11 +6,11 @@ import {
 } from '@nestjs/common';
 import { Reflector } from '@nestjs/core';
 
-import { UserRepository } from '../../repository/services/user.repository';
 import { SKIP_AUTH } from '../constants/constants';
 import { TokenType } from '../enums/token-type.enum';
 import { AuthCacheService } from '../services/auth-cache.service';
 import { TokenService } from '../services/token.service';
+import {UserRepository} from "../../../repository/services/user.repository";
 
 @Injectable()
 export class JwtAccessGuard implements CanActivate {

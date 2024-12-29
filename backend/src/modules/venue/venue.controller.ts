@@ -12,13 +12,13 @@ import {
 } from '@nestjs/common';
 import { ApiTags, ApiOperation, ApiParam } from '@nestjs/swagger';
 import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
-import {RoleUser} from "../../common/decorators/check.role";
-import {RolesGuard} from "../../common/guards/role.guard";
 import {UserRoleEnum} from "../../database/enums/roles.enum";
 import {UpdateVenueDto} from "./dto/req/update.venue.req.dto";
 import {CreateVenueDto} from "./dto/req/create.venue.req.dto";
 import {VenueService} from "./services/venue.service";
 import RequestWithUser from "./dto/req/request-with-user.interface";
+import {RolesGuard} from "../admin-manager/guards/role.guard";
+import {RoleUser} from "../admin-manager/decorators/check.role";
 
 @ApiTags('Venue')
 @Controller('venue')
@@ -41,7 +41,7 @@ export class VenueController {
         @Query('averageCheck') averageCheck?: number,
         @Query('rating') rating?: number,
         @Query('type') type?: string,
-        @Query('features') features?: string, // JSON-рядок з особливостями
+        @Query('features') features?: string,
         @Query('limit') limit?: number,
         @Query('offset') offset?: number,
     ) {
@@ -90,7 +90,7 @@ export class VenueController {
     @UseGuards(JwtAuthGuard)
     @Post(':venueId/like')
     async likeVenue(@Req() req: RequestWithUser, @Param('venueId') venueId: string) {
-        const userId = req.user.id;
+        const userId = req.user.userId;
         return await this.venueService.likeVenue(venueId, userId);
     }
 
@@ -99,7 +99,7 @@ export class VenueController {
     @UseGuards(JwtAuthGuard)
     @Delete(':venueId/like')
     async unlikeVenue(@Req() req: RequestWithUser, @Param('venueId') venueId: string) {
-        const userId = req.user.id;
+        const userId = req.user.userId;
         return await this.venueService.unlikeVenue(venueId, userId);
     }
 }

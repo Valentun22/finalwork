@@ -1,6 +1,6 @@
 import { Injectable, UnprocessableEntityException } from '@nestjs/common';
 import { DataSource, Repository } from 'typeorm';
-import { UserEntity } from '../../../database/entities/user.entity';
+import {UserEntity} from "../../modules/user/entity/user.entity";
 
 @Injectable()
 export class UserRepository extends Repository<UserEntity> {

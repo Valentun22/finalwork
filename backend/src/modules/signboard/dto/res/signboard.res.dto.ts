@@ -1,7 +1,7 @@
-import {UserEntity} from "../../../../database/entities/user.entity";
-import {ReviewEntity} from "../../../../database/entities/review.entity";
-import {NewsEntity} from "../../../../database/entities/news.entity";
-import {FavoriteEntity} from "../../../../database/entities/favorite.entity";
+import {UserEntity} from "../../../user/entity/user.entity";
+import {ReviewEntity} from "../../../review/ entities/review.entity";
+import {FavoriteEntity} from "../../../favorite/ entities/favorite.entity";
+import {NewsEntity} from "../../../news/entity/news.entity";
 
 export class SignboardResDto {
   signboard_id: string;

@@ -1,8 +1,8 @@
 import { SignboardResDto } from '../dto/res/signboard.res.dto';
 import { SignboardListReqDto } from '../dto/req/signboard-list.req.dto';
 import { SignboardListResDto } from '../dto/res/signboard-list.res.dto';
-import {VenueEntity} from "../../../database/entities/venue.entity";
-import {SignboardEntity} from "../../../database/entities/signboard.entity";
+import {SignboardEntity} from "../entity/signboard.entity";
+import {VenueEntity} from "../../venue/entity/venue.entity";
 
 export class SignboardMapper {
   public static toResponseDto(

@@ -1,14 +1,14 @@
 import { Entity, Column, OneToMany } from "typeorm";
-import { UserRoleEnum } from "../enums/roles.enum";
-import {RefreshTokenEntity} from "./refresh-token.entity";
-import {SignboardEntity} from "./signboard.entity";
-import {BaseModel} from "./models/base.model";
-import {AccountTypeEnum} from "../enums/account-type.enum";
-import {TableNameEnum} from "../enums/table-name.enum";
-import {VenueLikeEntity} from "../../modules/venue/entity/venueLike.entity";
-import {VenueEntity} from "../../modules/venue/entity/venue.entity";
-import {ReviewEntity} from "../../modules/review/ entities/review.entity";
-import {FavoriteEntity} from "../../modules/favorite/ entities/favorite.entity";
+import {TableNameEnum} from "../../../database/enums/table-name.enum";
+import {BaseModel} from "../../../database/entities/models/base.model";
+import {AccountTypeEnum} from "../../../database/enums/account-type.enum";
+import {UserRoleEnum} from "../../../database/enums/roles.enum";
+import {VenueEntity} from "../../venue/entity/venue.entity";
+import {ReviewEntity} from "../../review/ entities/review.entity";
+import {FavoriteEntity} from "../../favorite/ entities/favorite.entity";
+import {SignboardEntity} from "../../signboard/entity/signboard.entity";
+import {VenueLikeEntity} from "../../venue/entity/venueLike.entity";
+import {RefreshTokenEntity} from "../../auth/entity/refresh-token.entity";
 
 @Entity(TableNameEnum.USERS)
 export class UserEntity extends BaseModel {

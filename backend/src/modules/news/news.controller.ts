@@ -13,9 +13,9 @@ import { ApiTags, ApiOperation, ApiParam } from '@nestjs/swagger';
 import { CreateNewsDto } from './dto/create-news.dto';
 import { UpdateNewsDto } from './dto/update-news.dto';
 import {NewsService} from "./services/news.service";
-import {RolesGuard} from "../../common/guards/role.guard";
-import {RoleUser} from "../../common/decorators/check.role";
 import {UserRoleEnum} from "../../database/enums/roles.enum";
+import {RolesGuard} from "../admin-manager/guards/role.guard";
+import {RoleUser} from "../admin-manager/decorators/check.role";
 
 @ApiTags('News')
 @Controller('news')

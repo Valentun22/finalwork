@@ -1,5 +1,5 @@
 import { Request } from 'express';
-import { IUserData } from '../auth/interfaces/user-data.interface'; // Імпортуй свій інтерфейс IUserData
+import {IUserData} from "../../../auth/interfaces/user-data.interface";
 
 interface RequestWithUser extends Request {
     user: IUserData;

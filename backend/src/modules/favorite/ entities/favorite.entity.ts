@@ -1,8 +1,7 @@
 import {Entity, PrimaryGeneratedColumn, ManyToOne, JoinColumn, Column} from 'typeorm';
-import {UserEntity} from "../../../database/entities/user.entity";
 import {VenueEntity} from "../../venue/entity/venue.entity";
 import {TableNameEnum} from "../../../database/enums/table-name.enum";
-
+import {UserEntity} from "../../user/entity/user.entity";
 
 @Entity(TableNameEnum.FAVORITE)
 export class FavoriteEntity {

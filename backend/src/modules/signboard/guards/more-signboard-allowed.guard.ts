@@ -4,9 +4,8 @@ import {
   ForbiddenException,
   Injectable,
 } from '@nestjs/common';
-
 import { AccountTypeEnum } from '../../../database/enums/account-type.enum';
-import { UserRepository } from '../../repository/services/user.repository';
+import {UserRepository} from "../../../repository/services/user.repository";
 
 @Injectable()
 export class MoreSignboardAllowedGuard implements CanActivate {

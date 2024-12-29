@@ -1,8 +1,5 @@
 import { Injectable, UnauthorizedException } from '@nestjs/common';
 import * as bcrypt from 'bcrypt';
-
-import { RefreshTokenRepository } from '../../repository/services/refresh-token.repository';
-import { UserRepository } from '../../repository/services/user.repository';
 import { UserService } from '../../user/services/user.service';
 import { IUserData } from '../interfaces/user-data.interface';
 import { AuthMapper } from './auth.mapper';
@@ -13,6 +10,8 @@ import { AuthUserResDto } from '../dto/res/auth-user.res.dto';
 import { SignInReqDto } from '../dto/req/sign-in.req.dto';
 import { TokenResDto } from '../dto/res/token.res.dto';
 import {UserRoleEnum} from "../../../database/enums/roles.enum";
+import {UserRepository} from "../../../repository/services/user.repository";
+import {RefreshTokenRepository} from "../../../repository/services/refresh-token.repository";
 
 @Injectable()
 export class AuthService {

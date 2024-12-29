@@ -32,23 +32,18 @@ export class VenueService {
                 { search: `%${search}%` },
             );
         }
-
         if (tags && tags.length > 0) {
             query.andWhere('venue.tags && :tags', { tags });
         }
-
         if (averageCheck) {
             query.andWhere('venue.averageCheck <= :averageCheck', { averageCheck });
         }
-
         if (rating) {
             query.andWhere('venue.rating >= :rating', { rating });
         }
-
         if (type) {
             query.andWhere('venue.type = :type', { type });
         }
-
         if (features) {
             Object.entries(features).forEach(([key, value]) => {
                 query.andWhere(`venue.features ->> '${key}' = :${key}`, {
@@ -56,15 +51,12 @@ export class VenueService {
                 });
             });
         }
-
         if (limit) {
             query.take(limit);
         }
-
         if (offset) {
             query.skip(offset);
         }
-
         return await query.getMany();
     }
 

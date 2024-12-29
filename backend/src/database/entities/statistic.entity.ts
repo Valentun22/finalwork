@@ -1,7 +1,7 @@
 import { Column, Entity, JoinColumn, ManyToOne } from 'typeorm';
 import { BaseModel } from './models/base.model';
 import {TableNameEnum} from "../enums/table-name.enum";
-import {SignboardEntity} from "./signboard.entity";
+import {SignboardEntity} from "../../modules/signboard/entity/signboard.entity";
 
 @Entity(TableNameEnum.STATISTICS)
 export class StatisticEntity extends BaseModel {

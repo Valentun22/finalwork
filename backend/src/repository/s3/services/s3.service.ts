@@ -11,8 +11,7 @@ import * as dotenv from 'dotenv';
 import { v4 } from 'uuid';
 import getConfigs from '../../../configs/configuration';
 import { s3ClientMinio } from '../configs/minio-config';
-import {VenuesRepository} from "../../repository/services/venues.repository";
-
+import {VenuesRepository} from "../../services/venues.repository";
 dotenv.config({ path: './environments/local.env' });
 
 const s3Config = getConfigs().s3;

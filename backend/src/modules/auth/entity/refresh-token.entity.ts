@@ -1,7 +1,7 @@
 import { Column, Entity, JoinColumn, ManyToOne } from 'typeorm';
-import { BaseModel } from './models/base.model';
-import {UserEntity} from "./user.entity";
-import {TableNameEnum} from "../enums/table-name.enum";
+import {TableNameEnum} from "../../../database/enums/table-name.enum";
+import {BaseModel} from "../../../database/entities/models/base.model";
+import {UserEntity} from "../../user/entity/user.entity";
 
 @Entity(TableNameEnum.REFRESH_TOKEN)
 export class RefreshTokenEntity extends BaseModel {
