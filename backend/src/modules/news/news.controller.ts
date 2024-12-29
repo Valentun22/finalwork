@@ -10,12 +10,13 @@ import {
     UseGuards,
 } from '@nestjs/common';
 import { ApiTags, ApiOperation, ApiParam } from '@nestjs/swagger';
-import { CreateNewsDto } from './dto/create-news.dto';
-import { UpdateNewsDto } from './dto/update-news.dto';
+import { CreateNewsDto } from './dto/req/create-news.dto';
+import { UpdateNewsDto } from './dto/req/update-news.dto';
 import {NewsService} from "./services/news.service";
 import {UserRoleEnum} from "../../database/enums/roles.enum";
 import {RolesGuard} from "../admin-manager/guards/role.guard";
 import {RoleUser} from "../admin-manager/decorators/check.role";
+import {QueryNewsDto} from "./dto/req/query-news.dto";
 
 @ApiTags('News')
 @Controller('news')
@@ -66,5 +67,11 @@ export class NewsController {
     @Delete(':id')
     public async remove(@Param('id') id: string) {
         return await this.newsService.remove(id);
+    }
+
+    @ApiOperation({ summary: 'Get news by category' })
+    @Get()
+    public async getAll(@Query() query: QueryNewsDto) {
+        return await this.newsService.getAll(query);
     }
 }

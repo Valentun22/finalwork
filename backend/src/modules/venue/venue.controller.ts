@@ -19,6 +19,8 @@ import {VenueService} from "./services/venue.service";
 import RequestWithUser from "./dto/req/request-with-user.interface";
 import {RolesGuard} from "../admin-manager/guards/role.guard";
 import {RoleUser} from "../admin-manager/decorators/check.role";
+import {SendMessageDto} from "./dto/req/send-message.dto";
+import {QueryVenuesDto} from "./dto/req/query-venues.dto";
 
 @ApiTags('Venue')
 @Controller('venue')
@@ -102,4 +104,29 @@ export class VenueController {
         const userId = req.user.userId;
         return await this.venueService.unlikeVenue(venueId, userId);
     }
+
+    @ApiOperation({ summary: 'Notice of meeting' })
+    @ApiParam({ name: 'venueId', type: String, description: 'ID venues' })
+    @Post(':venueId/message')
+    public async sendMessage(
+        @Param('venueId') venueId: string,
+        @Body() dto: SendMessageDto,
+    ): Promise<{ message: string }> {
+        console.log(`Venue ID: ${venueId}, Message: ${JSON.stringify(dto)}`);
+        return { message: 'Message sent successfully (stub)' };
+    }
+
+    @ApiOperation({ summary: 'Get venues with filters and sorting' })
+    @Get()
+    public async getAll(@Query() query: QueryVenuesDto) {
+        return await this.venueService.getAllVenueList(query);
+    }
+
+    @ApiOperation({ summary: 'Get top venues by category' })
+    @Get('/top')
+    public async getTopVenues(@Query('category') category: string) {
+        return await this.venueService.getTopByCategory(category);
+    }
+
+
 }

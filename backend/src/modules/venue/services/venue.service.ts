@@ -6,6 +6,8 @@ import {CreateVenueDto} from "../dto/req/create.venue.req.dto";
 import {UpdateVenueDto} from "../dto/req/update.venue.req.dto";
 import FindAllOptions from "../interfaces/findAll.interface";
 import {VenueLikeEntity} from "../entity/venueLike.entity";
+import {QueryVenuesDto} from "../dto/req/query-venues.dto";
+import { Like } from 'typeorm';
 
 @Injectable()
 export class VenueService {
@@ -108,5 +110,32 @@ export class VenueService {
 
         venue.likes--;
         return await this.venueRepository.save(venue);
+    }
+
+    public async getAllVenueList(query: QueryVenuesDto): Promise<VenueEntity[]> {
+        const { sortBy, filters, search } = query;
+        const qb = this.venueRepository.createQueryBuilder('venue');
+        if (search) {
+            qb.where('venue.name ILIKE :search', { search: `%${search}%` });
+        }
+        if (filters) {
+            filters.split(',').forEach((filter) => {
+                if (filter === 'wifi') qb.andWhere(`:filter = ANY (venue.tags)`, { filter: 'wifi' });
+                if (filter === 'parking') qb.andWhere(`:filter = ANY (venue.tags)`, { filter: 'parking' });
+            });
+        }
+        if (sortBy) {
+            const [field, direction] = sortBy.split(':');
+            qb.orderBy(`venue.${field}`, direction.toUpperCase() as 'ASC' | 'DESC');
+        }
+        return qb.getMany();
+    }
+
+    public async getTopByCategory(category: string): Promise<VenueEntity[]> {
+        return this.venueRepository.find({
+            where: { tags: Like(`%${category}%`) },
+            order: { rating: 'DESC' },
+            take: 10,
+        });
     }
 }
