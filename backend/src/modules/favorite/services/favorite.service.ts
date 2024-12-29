@@ -1,10 +1,7 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import {FavoriteEntity} from "../ entities/favorite.entity";
-import {IUserData} from "../../auth/interfaces/user-data.interface";
-import {AddFavoriteDto} from "../dto/add-favorite.dto";
-
 
 @Injectable()
 export class FavoriteService {
@@ -13,15 +10,19 @@ export class FavoriteService {
         private readonly favoriteRepository: Repository<FavoriteEntity>,
     ) {}
 
-    public async addFavorite(
-        userData: IUserData,
-        dto: AddFavoriteDto,
-    ): Promise<{ message: string }> {
-        const favorite = this.favoriteRepository.create({
-            ...dto,
-            userId: userData.userId,
+    async addFavorite(userId: string, venueId: string): Promise<FavoriteEntity> {
+        const favorite = this.favoriteRepository.create({ userId, venueId });
+        return await this.favoriteRepository.save(favorite);
+    }
+
+    async removeFavorite(userId: string, venueId: string): Promise<void> {
+        await this.favoriteRepository.delete({ userId, venueId });
+    }
+
+    async getUserFavorites(userId: string): Promise<FavoriteEntity[]> {
+        return await this.favoriteRepository.find({
+            where: { userId },
+            relations: ['venue'],
         });
-        await this.favoriteRepository.save(favorite);
-        return { message: 'Venue added to favorites successfully' };
     }
 }

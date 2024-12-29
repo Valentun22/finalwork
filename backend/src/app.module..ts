@@ -7,6 +7,7 @@ import {RedisModule} from "./modules/redis/redis.module";
 import {UserModule} from "./modules/user/user.module";
 import {FavoriteModule} from "./modules/favorite/favorite.module";
 import {ReviewModule} from "./modules/review/review.module";
+import {NewsModule} from "./modules/news/news.module";
 
 @Module({
     imports: [
@@ -20,6 +21,7 @@ import {ReviewModule} from "./modules/review/review.module";
         RedisModule,
         FavoriteModule,
         ReviewModule,
+        NewsModule
     ],
 })
 export class AppModule {}
