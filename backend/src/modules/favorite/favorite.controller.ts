@@ -3,7 +3,7 @@ import {
     Post,
     Delete,
     Param,
-    UseGuards,
+    UseGuards, Get,
 } from '@nestjs/common';
 import { ApiTags, ApiOperation, ApiParam } from '@nestjs/swagger';
 import {FavoriteService} from "./services/favorite.service";
@@ -35,5 +35,13 @@ export class FavoriteController {
     ) {
         const userId = user.userId;
         return await this.favoriteService.removeFavorite(userId, venueId);
+    }
+
+    @ApiOperation({ summary: 'Get user favorites' })
+    @UseGuards(JwtAuthGuard)
+    @Get()
+    async getUserFavorites(@CurrentUser() user: IUserData) {
+        const userId = user.userId;
+        return await this.favoriteService.getUserFavorites(userId);
     }
 }

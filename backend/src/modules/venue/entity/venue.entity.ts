@@ -37,10 +37,10 @@ export class VenueEntity extends BaseModel {
     menu?: string[];
 
     @Column({ type: 'float', nullable: true })
-    latitude?: number; // Широта
+    latitude?: number;
 
     @Column({ type: 'float', nullable: true })
-    longitude?: number; // Довгота
+    longitude?: number;
 
     @Column({ default: 0 })
     likes: number;

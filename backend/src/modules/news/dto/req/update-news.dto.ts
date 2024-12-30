@@ -1,11 +1,7 @@
-import { IsOptional, IsString } from 'class-validator';
+import {PickType} from "@nestjs/swagger";
+import {NewsEntity} from "../../entity/news.entity";
 
-export class UpdateNewsDto {
-    @IsOptional()
-    @IsString()
-    title?: string;
-
-    @IsOptional()
-    @IsString()
-    content?: string;
-}
+export class UpdateNewsDto extends PickType(NewsEntity, [
+  'title',
+  'content'
+]) {}

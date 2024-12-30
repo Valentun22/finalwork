@@ -40,7 +40,7 @@ export class AdminManagerService {
 
   public async deleteUser(userId: string): Promise<void> {
     const userEntity = await this.userRepository.findByIdOrThrow(userId);
-    await this.userRepository.delete(userEntity);
+    await this.userRepository.delete(userEntity.id);
   }
 
   public async blockSignboard(signboard_Id: string): Promise<void> {
